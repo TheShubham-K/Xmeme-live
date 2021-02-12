@@ -1,0 +1,32 @@
+{% extends "Xmeme/index.html" %} {% load crispy_forms_tags %} {% block content %}
+
+<!--  page to display the json format of all the memes in the server -->
+
+<div class="mw6 center pa3 sans-serif">
+
+    {% for m in meme_list %}
+
+    <div class="pa2 mb3 striped--near-white">
+
+        <div class="pl2">
+
+            <p class="mb2">"id" : {{ m.id }}</p>
+
+            <p class="mb2">"name" : {{ m.name }}</p>
+
+            <p class="mb2">"url" : {{ m.url }}</p>
+
+            <p class="mb2">"caption" : {{ m.captions }}</p>
+
+
+        </div>
+
+    </div>
+
+    {% endfor %}
+
+</div>
+
+
+
+{% endblock content %}

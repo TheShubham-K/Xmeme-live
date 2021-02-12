@@ -1,0 +1,24 @@
+{% extends "Xmeme/index.html" %} {% load crispy_forms_tags %} {% block content %}
+<p>
+    <!-- Form page -->
+    <form action="" method="post" autocomplete="off">
+
+        {% csrf_token %} {{ form|crispy }}
+
+        <div class="row">
+
+            <div class="col-md-8">
+                <button type="submit" class="btn btn-primary btn-block btn-lg">Submit meme</button>
+            </div>
+            <div class="col-md-4">
+                <a href="{% url 'memes_List' %}" class="btn btn-alert btn-block btn-lg">
+                    <i class="fas fa-stream"></i> Back to Memes
+                </a>
+            </div>
+        </div>
+
+    </form>
+
+
+</p>
+{% endblock content %}

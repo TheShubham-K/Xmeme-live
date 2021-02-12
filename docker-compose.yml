@@ -1,0 +1,48 @@
+version: "3.9"
+  
+  
+x-service-volumes: &service-volumes
+  - ./:/app/:rw,cached
+
+x-database-variables: &database-variables
+  POSTGRES_DB: postgres
+  POSTGRES_USER: postgres
+  POSTGRES_PASSWORD: postgres
+
+x-app-variables: &app-variables
+  <<: *database-variables
+  POSTGRES_HOST: db
+
+services:
+  db:
+    image: postgres
+    environment: *database-variables
+    ports:
+      - "5432:5432"
+    volumes:
+      - db-data:/var/lib/postgresql/data
+
+  website:
+    image: xmeme:latest
+    command: python manage.py runserver 0.0.0.0:8081 
+    volumes: *service-volumes
+    environment: 
+      - POSTGRES_DB=postgres
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_HOST=db
+    ports:
+      - "8081:8081"
+    depends_on:
+      - db_migrate
+
+  db_migrate:
+    image: xmeme:latest
+    command: python manage.py migrate
+    volumes: *service-volumes
+    environment: *app-variables
+    depends_on:
+      - db
+
+volumes:
+  db-data:
