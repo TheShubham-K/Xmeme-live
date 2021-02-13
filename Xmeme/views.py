@@ -23,7 +23,8 @@ def memes_form(request, id=0):
                 form = memesForm()
             else:
                 meme = memes.objects.get(pk=id)
-                form = memesForm(instance=meme)    
+                form = memesForm(instance=meme)
+                form.fields['name'].disabled = True 
             return render(request, "Xmeme/memes_form.html", {'form': form})
         else:
             if id == 0:
@@ -31,6 +32,7 @@ def memes_form(request, id=0):
             else:
                 meme = memes.objects.get(pk=id)
                 form = memesForm(request.POST,instance=meme)
+                form.fields['name'].disabled = True
             if form.is_valid():
                 form.save()
             return redirect('/')
