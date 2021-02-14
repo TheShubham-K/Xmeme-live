@@ -1,4 +1,4 @@
 xmeme_env
 .vscode
 .env
-env
+./env
