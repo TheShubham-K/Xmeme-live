@@ -1,21 +1,31 @@
 ## Xmeme
 
- A web application for memer's
+A web application for memer's
+
+## Teach Stack
+
+- Python Django framework for API's
+- Bootstrap 4 for customizing the application
+- Postgresql for database
+- Docker for containerizing
+- Heroku for front deployment
+- Heroku-Postgres for publishing the database online
+
 
 ## setup
 
 The first thing to do is to clone the repository:
 
 ```sh
-$ git clone https://gitlab.crio.do/COHORT_ME_BUILDOUT_XMEME_ENROLL_1612436694845/theshubhamkumar01-me_buildout_xmeme.git
+$ git clone https://github.com/TheShubham-K/Xmeme-live.git
 $ cd crio_xmeme
 ```
 
 Create a virtual environment to install dependencies in and activate it:
 
 ```sh
-$ virtualenv2 --no-site-packages env
-$ source env/bin/activate
+$ python -m venv env
+$ env\Scripts\activate
 ```
 
 
@@ -26,7 +36,7 @@ Then install the dependencies:
 ```
 
 Note the `(env)` in front of the prompt. This indicates that this terminal
-session operates in a virtual environment set up by `virtualenv2`.
+session operates in a virtual environment set up by `venv`.
 
 make a .env file in the crio_xmeme project directory `(not in the root directory)` and save your ``SECRET_KEY`` in it in the following way :
 ```sh 
@@ -34,45 +44,41 @@ SECRET_KEY=your_secret_key
 ```
 
 
-Once `pip` has finished downloading the dependencies and finished setting .env file :
-make sure that you have docker installed in your local machine and it's running and also install chocolatey to run `make` command for windows.
-
-Link to install chocolatey packages.
-```sh
-https://chocolatey.org/install
-``` 
-
-After installing chocolety packages install make packages using the following command in your power shell in adminstrative.
-
-```sh
-choco install make
-```
-
-`dont't forget to update your path variables for chocolatey packages`
+Once `pip` has finished downloading the dependencies and finished setting .env file.
 
 ```sh
 (env)$ cd crio_xmeme
-(env)$ make compose-start
 ```
 
-if some error occurs then first try running these following command :
+Download postgresql in your machine and also install pgAdmin 4 for postgresql.
+
 ```sh
-(env)$ make build
-(env)$ make build-prod
-(env)$ make compose-start
+https://www.pgadmin.org/download/pgadmin-4-windows/
+```
+After u have finished installing follow these instructions for migrating the database.
+
+open terminal and navigate to the project directory and activate your virtual environment.
+
+```sh
+python manage.py migrate 
 ```
 
-To stop the docker server :
+this will create a new database for your local machine.
+
 ```sh
-(env)$ make compose-stop
+python manage.py runserver 
 ```
+
+and this will start the server locally in your machine.
+
 
 These are the list of API routes to navigate through.
 
 ```sh
-http://localhost:8000/memes/  # Memes Stream List
-http://localhost:8000/memes/<id>/ # to a particular meme with id (place the id of the meme in place of <id> in integer number format)
-http://localhost:8000/memes-form/ # to add a new meme in the memes list
-http://localhost:8000/memes-update/3/ # to update a meme.
+http://localhost:8081/  # Memes Stream List
+http://localhost:8081/memes/  # Memes Stream json List 
+http://localhost:8081/memes/<id>/ # to a particular meme with id (place the id of the meme in place of <id> in integer number format)
+http://localhost:8081/memes-form/ # to add a new meme in the memes list
+http://localhost:8081/memes-update/3/ # to update a meme.
 ```
 
